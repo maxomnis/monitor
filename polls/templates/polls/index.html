@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 导入css的写法,真繁琐-->
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{% if latest_poll_list %}
+    <ul>
+    {% for poll in latest_poll_list %}
+        <li><a href="/polls/{{ poll.id }}/">{{ poll.question }}</a></li>
+        <li><a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a></li> <!-- 这里的polls是monitor/url.py的namespace的设置值,用于区分不同app的相同的url地址,添加了命名空间的写法-->
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>
+</html>

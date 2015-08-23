@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- 导入css的写法,真繁琐-->
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+    <meta charset="UTF-8">
+    <style>
+        #login {
+               width:300px;
+               height:200px;
+               position:absolute;
+               left:50%;
+               top:50%;
+               margin:-100px 0 0 -150px
+        }
+
+        #button{
+            left:50%;
+        }
+    </style>
+         <script type="text/javascript">
+                successFun = function(data){
+                  alert(data.msg);
+                }
+
+                $(document).ready(function(){
+                  $("#submit").click(function(){
+                      $.ajax({
+                          url:'login/',
+                          data:$('#login_form').serialize(),
+                          type:'post',
+                          dataType:'json',
+                          success:successFun
+                      })
+
+                  });
+                });
+        </script>
+</head>
+<body>
+<div id="login">
+    {% csrf_token %}
+   <form id="login_form" class="bs-example bs-example-form" role="form" action="login">
+      <div class="input-group">
+         <span class="input-group-addon">账号</span>
+         <input id="account" type="text" class="form-control" placeholder="twitterhandle">
+      </div>
+      <br>
+        <div class="input-group">
+         <span class="input-group-addon">密码</span>
+         <input id="password" type="text" class="form-control" placeholder="twitterhandle">
+      </div>
+      <br>
+       <button id="submit" type="button" class="btn btn-default">提交</button>
+   </form>
+</div>
+</body>
+</html>
