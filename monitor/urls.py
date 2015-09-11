@@ -21,8 +21,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^$', include('common.urls', namespace="common")),
-    url(r'^login/', include('common.urls', namespace="common")),
+    url(r'^index/', include('common.urls', namespace="common")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^polls/', include('polls.urls',namespace="polls")),#添加命名空间,用于区分不同app的相同的连接
+    url(r'^server/', include('server.urls', namespace="server")),
 ]
 
